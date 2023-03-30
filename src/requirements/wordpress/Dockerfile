@@ -22,9 +22,9 @@ RUN apt-get update && \
     php-xml \
     php-bcmath
 
-COPY conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
+COPY conf/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 RUN mkdir /run/php
 
@@ -39,5 +39,5 @@ CMD /usr/sbin/php-fpm7.4 -F -R
 
 # command
 # docker build -t wordpress -f Dockerfile .
-# docker run -it --rm -d -p 9000:9000 --name=wordpress -v `./html`:`/var/www/html` wordpress
+# docker run -it --rm -d -p 9000:9000 --name=wordpress -v html:/var/www/html wordpress
 # docker exec -it web sh

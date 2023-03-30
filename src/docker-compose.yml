@@ -12,20 +12,24 @@ services:
     volumes:
       - ./requirements/wordpress/html:/var/www/html/
     networks:
-      - website
+      - wordpress
   nginx:
     container_name: nginx
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     ports:
-      - "443:443"
+      - "8443:443"
       - "8080:80"
     volumes:
       - ./requirements/wordpress/html:/var/www/html/
     depends_on:
       - wordpress
+    networks:
+      - wordpress
     restart: always
+
 networks:
-  database:
-  website:
+  wordpress:
+    name: wp-wordpress
+    driver: bridge
