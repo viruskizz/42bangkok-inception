@@ -29,4 +29,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # command
 # docker build -t nginx -f Dockerfile .
-# docker run -it --rm -d -p 8080:80 --name web nginx
+# docker run -it --rm -d -p 8080:80 -p 443:443 --name web nginx
