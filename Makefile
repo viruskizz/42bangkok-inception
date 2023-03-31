@@ -5,7 +5,11 @@ NGINX = nginx
 
 all: $(NAME)
 
-$(NAME): up
+$(NAME): mkdir_data up
+
+mkdir_data:
+	mkdir -p $(HOME)/data
+	mkdir -p $(HOME)/data/wordpress
 
 up:
 	cd $(SRC) && docker compose up -d

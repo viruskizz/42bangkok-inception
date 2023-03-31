@@ -36,3 +36,8 @@ networks:
 
 volumes:
   wordpress:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "$HOME/data/wordpress"
