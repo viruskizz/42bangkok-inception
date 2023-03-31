@@ -2,8 +2,8 @@
 # https://www.baeldung.com/openssl-self-signed-cert
 echo $DOMAIN_NAME
 
-sudo openssl dhparam \
-    -out ./certs/dhparam.pem 2048
+openssl dhparam \
+    -out /etc/nginx/dhparam.pem 2048
 
 openssl genrsa \
     -out /etc/ssl/certs/private.key 2048
