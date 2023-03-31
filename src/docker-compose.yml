@@ -6,7 +6,7 @@ services:
     container_name: wordpress
     build:
       context: ./requirements/wordpress
-      dockerfile: Dockerfile
+      # dockerfile: Dockerfile
     ports:
       - 9000:9000
     volumes:
@@ -17,7 +17,7 @@ services:
     container_name: nginx
     build:
       context: ./requirements/nginx
-      dockerfile: Dockerfile
+      # dockerfile: Dockerfile
     ports:
       - "8443:443"
       - "8080:80"
