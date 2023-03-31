@@ -1,21 +1,18 @@
 #!bin/bash
-DOMIAN_NAME="tsomsa.42.fr"
+# https://www.baeldung.com/openssl-self-signed-cert
+echo $DOMAIN_NAME
 
 sudo openssl dhparam \
     -out ./certs/dhparam.pem 2048
 
 openssl genrsa \
-    -out /certs/${DOMIAN_NAME}-signed.key 2048
-
-openssl req \
-    -new \
-    -key /certs/${DOMIAN_NAME}-signed.key \
-    -out /certs/${DOMIAN_NAME}-signed.csr
+    -out /etc/ssl/certs/private.key 2048
 
 openssl req \
     -x509 \
     -nodes \
     -days 365 \
     -newkey rsa:2048 \
-    -keyout /certs/${DOMIAN_NAME}-signed.key \
-    -out /certs/${DOMIAN_NAME}-signed.crt
+    -keyout /etc/ssl/certs/private.key \
+    -out /etc/ssl/certs/cert.crt \
+	-subj "/C=TH/ST=Bangkok/L=Bangkok/O=42Bangkok/OU=Crocodile/CN=$DOMAIN_NAME"

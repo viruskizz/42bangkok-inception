@@ -1,16 +1,17 @@
 NAME = inception
 
+SRC = ./src
+NGINX = nginx
+
 all: $(NAME)
 
-$(NAME):
-	docker compose \
-		--file src/docker-compose.yml \
-		--env-file "./src/.env" \
-		up \
-		--build
+$(NAME): up
 
-down:
-	docker compose down
+up:
+	cd $(SRC) && docker compose up -d
+down: stop
+	cd $(SRC) && docker compose down
+stop:
+	cd $(SRC) && docker compose stop
 
-nginx:
-	docker build -t nginx -f src/requirements/nginx/Dockerfile .
+.PHONY: cd up down stop
