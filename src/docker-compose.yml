@@ -5,6 +5,10 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb
+      args:
+        - MYSQL_ROOT_PASSWORD
+        - MYSQL_USER
+        - MYSQL_PASSWORD
     environment:
       - MYSQL_ROOT_PASSWORD
       - MYSQL_USER

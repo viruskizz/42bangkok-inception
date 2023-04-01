@@ -1,5 +1,9 @@
 FROM debian:buster-slim
 
+ARG MYSQL_ROOT_PASSWORD
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+
 RUN apt-get update \
     && apt-get install -y \
     locales \
@@ -18,8 +22,9 @@ RUN /root/tools/dbsetup.sh
 
 EXPOSE 3306
 
-CMD [ "mysqld" ]
+WORKDIR /root
 
+CMD ["mysqld"]
 
 # command
 # docker build -t mariadb .
