@@ -10,6 +10,7 @@ $(NAME): mkdir_data up
 mkdir_data:
 	mkdir -p $(HOME)/data
 	mkdir -p $(HOME)/data/wordpress
+	mkdir -p $(HOME)/data/database
 
 up:
 	cd $(SRC) && docker compose up -d

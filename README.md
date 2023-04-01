@@ -5,9 +5,23 @@ The `docker` container project. There are multiple containers in single project.
 ## command
 
 ```sh
-docker compose \
-    --file src/docker-compose.yml \
-    --env-file "./src/.env" \
-    up \
-    --build
+make up
+```
+
+
+## Database Part
+
+Check config
+```sh
+cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
+```
+
+check network
+```sh
+telnet 127.0.0.1 3360
+```
+
+access db from remote
+```sh
+mysql -h 127.0.0.1 -P 3306 -u root -p
 ```

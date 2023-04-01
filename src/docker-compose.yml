@@ -1,6 +1,24 @@
 version: "3.9"
 
 services:
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+      args:
+        - MYSQL_ROOT_PASSWORD
+        - MYSQL_USER
+        - MYSQL_PASSWORD
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    ports:
+      - 3360:3306
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - wordpress
   wordpress:
     container_name: wordpress
     build:
@@ -33,6 +51,9 @@ networks:
   wordpress:
     name: wp-wordpress
     driver: bridge
+  mariadb:
+    name: db-mariadb
+    driver: bridge
 
 volumes:
   wordpress:
@@ -41,3 +62,13 @@ volumes:
       type: "none"
       o: "bind"
       device: "$HOME/data/wordpress"
+  database:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "$HOME/data/database"
+
+# sed 's/bind-address.*$/bind-address\t= 127.0.0.1/' /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
+# sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
+# cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
