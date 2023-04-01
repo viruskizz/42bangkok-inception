@@ -1,8 +1,26 @@
-FROM debian:11.6-slim
+FROM debian:buster-slim
 
 RUN apt-get update \
-    && apt-get install -y locales \
+    && apt-get install -y \
+    locales \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 ENV LANG en_US.utf8
+
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+    mariadb-server \
+    mariadb-client
+
+COPY ./tools/ /root/tools
+RUN chmod +x /root/tools/*.sh
+RUN /root/tools/dbsetup.sh
+
+EXPOSE 3306
+
+CMD [ "mysqld" ]
+
+
+# command
+# docker build -t mariadb .
+# docker run --rm -it mariadb sh
