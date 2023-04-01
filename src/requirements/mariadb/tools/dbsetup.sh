@@ -1,15 +1,11 @@
 #!bin/bash
-export SQL_ROOT_PASSWORD="1234"
-# UPDATE mysql.user SET Password=PASSWORD('1234') WHERE User='root';
-# # UPDATE mysql.user SET Password=PASSWORD('{$SQL_ROOT_PASSWORD}') WHERE User='root';
-# DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-# DELETE FROM mysql.user WHERE User='';
-# DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
-# FLUSH PRIVILEGES;
+# Allow Remote Access
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
-# ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
+# Start MariaDB Server
 service mysql start
 
+# Initialize Database
 mysql_secure_installation << EOF
 n
 $MYSQL_ROOT_PASSWORD
@@ -22,7 +18,9 @@ y
 EOF
 
 mysql << EOF
+USE mysql;
+FLUSH PRIVILEGES;
 CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '';
-GRANT ALL ON *.* TO 'tsomsa'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;
+GRANT ALL ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
