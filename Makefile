@@ -29,4 +29,6 @@ fclean:
 
 re: fclean all
 
+bonus: all
+
 .PHONY: mkdir_data up down stop clean fclean re
