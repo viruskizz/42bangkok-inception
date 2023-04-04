@@ -19,4 +19,16 @@ down: stop
 stop:
 	cd $(SRC) && docker compose stop
 
-.PHONY: cd up down stop
+clean: down
+	-docker rmi -f $$(docker images "src-*" | awk 'NR!=1 {print}' | awk '{print $$1}')
+
+fclean:
+	-docker volume rm $$(docker volume ls --filter "Name = src_*" | awk 'NR!=1 {print}' | awk '{print $$2}')
+	sudo rm -rf $(HOME)/data/wordpress
+	sudo rm -rf $(HOME)/data/database
+
+re: fclean all
+
+bonus: all
+
+.PHONY: mkdir_data up down stop clean fclean re

@@ -19,6 +19,7 @@ services:
       - database:/var/lib/mysql
     networks:
       - wordpress
+
   wordpress:
     container_name: wordpress
     build:
@@ -31,6 +32,10 @@ services:
       - wordpress:/var/www/html/wordpress
     networks:
       - wordpress
+    depends_on:
+      - mariadb
+    restart: always
+
   nginx:
     container_name: nginx
     build:
@@ -42,9 +47,10 @@ services:
       - "8080:80"
     volumes:
       - wordpress:/var/www/html/wordpress
-    depends_on:
-      - wordpress
+
     networks:
+      - wordpress
+    depends_on:
       - wordpress
     restart: always
 networks:
