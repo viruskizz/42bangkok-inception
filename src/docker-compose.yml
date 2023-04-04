@@ -25,7 +25,20 @@ services:
     build:
       context: ./requirements/wordpress
     environment:
-      - DOMAIN_NAME
+      - DB_HOST
+      - DB_NAME
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - WP_DOMAIN
+      - WP_SCHEME
+      - WP_PORT
+      - WP_TITLE
+      - WP_ADMIN
+      - WP_ADMIN_PASSWORD
+      - WP_ADMIN_EMAIL
+      - WP_USER
+      - WP_USER_EMAIL
+      - WP_USER_PASSWORD
     ports:
       - 9000:9000
     volumes:
@@ -41,13 +54,12 @@ services:
     build:
       context: ./requirements/nginx
     environment:
-      - DOMAIN_NAME
+      - WP_DOMAIN
     ports:
       - "8443:443"
       - "8080:80"
     volumes:
       - wordpress:/var/www/html/wordpress
-
     networks:
       - wordpress
     depends_on:

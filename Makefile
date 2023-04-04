@@ -22,7 +22,7 @@ stop:
 clean: down
 	-docker rmi -f $$(docker images "src-*" | awk 'NR!=1 {print}' | awk '{print $$1}')
 
-fclean:
+fclean: clean
 	-docker volume rm $$(docker volume ls --filter "Name = src_*" | awk 'NR!=1 {print}' | awk '{print $$2}')
 	sudo rm -rf $(HOME)/data/wordpress
 	sudo rm -rf $(HOME)/data/database

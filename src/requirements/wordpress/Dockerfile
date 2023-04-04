@@ -1,17 +1,20 @@
-FROM debian:11.6-slim
+FROM debian:buster-slim
 
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get upgrade -y \
+    && apt-get install --no-install-recommends --no-install-suggests -y \
     locales \
     curl \
     less \
+    ca-certificates \
+    mariadb-client \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 ENV LANG en_US.utf8
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends --no-install-suggests -y \
+RUN apt-get update \
+    && apt-get install --no-install-recommends --no-install-suggests -y \
     php \
     php-fpm \
     php-cli \
@@ -25,8 +28,10 @@ RUN apt-get update && \
     php-xml \
     php-bcmath
 
-COPY conf/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
-COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
+COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+
+COPY conf/my.cnf /etc/my.cnf
 
 COPY ./tools /root/tools
 RUN chmod +x /root/tools/*.sh
