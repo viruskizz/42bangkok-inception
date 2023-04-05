@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install --no-install-recommends --no-install-sugge
     openssl
 
 COPY conf/tsomsa.42.fr.conf /etc/nginx/conf.d
+COPY conf/default.conf      /etc/nginx/sites-available/default
 COPY conf/ssl-signed.conf   /etc/nginx/snippets/
 COPY conf/ssl-params.conf   /etc/nginx/snippets/
-# COPY conf/dhparam.pem       /etc/nginx/dhparam.pem
 
 COPY ./tools /root/tools
 RUN chmod +x /root/tools/*.sh && /root/tools/generate-ssl.sh

@@ -39,7 +39,6 @@ services:
       - WP_USER
       - WP_USER_EMAIL
       - WP_USER_PASSWORD
-      - REDIS_PASSWORD
     ports:
       - 9000:9000
     volumes:

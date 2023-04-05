@@ -6,6 +6,7 @@ RUN apt-get update \
     locales \
     curl \
     less \
+    wget \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
@@ -34,13 +35,14 @@ RUN apt-get update \
 
 COPY conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-
 COPY conf/my.cnf /etc/my.cnf
 
 COPY ./tools /root/tools
 RUN chmod +x /root/tools/*.sh
 
-RUN /root/tools/wpsetup.sh
+RUN /root/tools/wp-setup.sh
+
+RUN /root/tools/adminer.sh
 
 STOPSIGNAL SIGQUIT
 
@@ -48,7 +50,7 @@ EXPOSE 9000
 
 WORKDIR /var/www/html/wordpress
 
-ENTRYPOINT [ "sh", "/root/tools/entry.sh" ]
+ENTRYPOINT [ "sh", "/root/tools/docker-entrypoint.sh" ]
 
 # command
 # docker build -t wordpress -f Dockerfile .
