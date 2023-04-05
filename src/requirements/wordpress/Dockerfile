@@ -7,11 +7,15 @@ RUN apt-get update \
     curl \
     less \
     ca-certificates \
-    mariadb-client \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 ENV LANG en_US.utf8
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends --no-install-suggests -y \
+    mariadb-client \
+    redis-tools
 
 RUN apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \

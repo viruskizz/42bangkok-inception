@@ -39,6 +39,7 @@ services:
       - WP_USER
       - WP_USER_EMAIL
       - WP_USER_PASSWORD
+      - REDIS_PASSWORD
     ports:
       - 9000:9000
     volumes:
@@ -47,6 +48,7 @@ services:
       - wordpress
     depends_on:
       - mariadb
+      - redis
     restart: always
 
   nginx:
@@ -65,6 +67,19 @@ services:
     depends_on:
       - wordpress
     restart: always
+
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - wordpress
+    restart: always
+
 networks:
   wordpress:
     name: wp-wordpress
@@ -86,7 +101,3 @@ volumes:
       type: "none"
       o: "bind"
       device: "$HOME/data/database"
-
-# sed 's/bind-address.*$/bind-address\t= 127.0.0.1/' /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
-# sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
-# cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
