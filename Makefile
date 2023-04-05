@@ -31,4 +31,7 @@ re: fclean all
 
 bonus: all
 
+up-redis:
+	cd $(SRC) && docker compose up redis
+
 .PHONY: mkdir_data up down stop clean fclean re
