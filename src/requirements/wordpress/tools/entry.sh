@@ -33,14 +33,14 @@ if [ ! -f wp-config.php ]; then
   wp option update home "$WP_SCHEME://tsomsa.42.fr:$WP_PORT" --allow-root
 fi
 
-# wp config set WP_REDIS_HOST "redis" --allow-root --quiet
-# wp config set WP_REDIS_PORT "6379" --allow-root --quiet
-# wp config set WP_REDIS_PASSWORD "$REDIS_PASSWORD" --allow-root --quiet
-# wp config set WP_REDIS_TIMEOUT "1" --allow-root --quiet
-# wp config set WP_REDIS_READ_TIMEOUT "1" --allow-root --quiet
-# wp config set WP_REDIS_DATABASE "0" --allow-root --quiet
-# # Install redis plugin
-# wp plugin install redis-cache --activate --allow-root --quiet
+wp config set WP_REDIS_HOST "redis" --allow-root --quiet
+wp config set WP_REDIS_PORT "6379" --allow-root --quiet
+wp config set WP_REDIS_PASSWORD "$REDIS_PASSWORD" --allow-root --quiet
+wp config set WP_REDIS_TIMEOUT "1" --allow-root --quiet
+wp config set WP_REDIS_READ_TIMEOUT "1" --allow-root --quiet
+wp config set WP_REDIS_DATABASE "0" --allow-root --quiet
+# Install redis plugin
+wp plugin install redis-cache --activate --allow-root --quiet
 
 # Start php-fpm
 DIR="/run/php"

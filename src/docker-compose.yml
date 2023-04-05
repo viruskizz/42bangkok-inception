@@ -48,7 +48,7 @@ services:
       - wordpress
     depends_on:
       - mariadb
-      # - redis
+      - redis
     restart: always
 
   nginx:
@@ -68,17 +68,17 @@ services:
       - wordpress
     restart: always
 
-  # redis:
-  #   container_name: redis
-  #   build:
-  #     context: ./requirements/redis
-  #   ports:
-  #     - "6379:6379"
-  #   volumes:
-  #     - wordpress:/var/www/wordpress
-  #   networks:
-  #     - wordpress
-  #   restart: always
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - wordpress
+    restart: always
 
 networks:
   wordpress:
