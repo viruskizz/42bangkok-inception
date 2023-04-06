@@ -94,7 +94,7 @@ services:
       - wordpress
     restart: always
     volumes:
-      - /data:/home/$FTP_USER
+      - /data:/home/$FT_USER
 
 networks:
   wordpress:

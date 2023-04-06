@@ -15,7 +15,7 @@ chown -R "$FT_USER:" /home/$FT_USER/ftp_dir
 
 mkdir -p /var/run/vsftpd/empty
 
-echo "$FTP_USER" | tee -a /etc/vsftpd.chroot_list > /dev/null
+echo "$FT_USER" | tee -a /etc/vsftpd.chroot_list > /dev/null
 
 fi
 
