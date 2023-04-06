@@ -2,6 +2,9 @@
 
 The `docker` container project. There are multiple containers in single project. Run all services in application with `docker-compose`.
 
+## Resources
+ - https://github.com/mjstealey/wordpress-nginx-docker
+
 ## command
 
 ```sh

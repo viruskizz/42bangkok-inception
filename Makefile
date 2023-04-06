@@ -11,6 +11,7 @@ mkdir_data:
 	mkdir -p $(HOME)/data
 	mkdir -p $(HOME)/data/wordpress
 	mkdir -p $(HOME)/data/database
+	mkdir -p $(HOME)/data/prometheus
 
 up:
 	cd $(SRC) && docker compose up -d
@@ -26,6 +27,7 @@ fclean: clean
 	-docker volume rm $$(docker volume ls --filter "Name = src_*" | awk 'NR!=1 {print}' | awk '{print $$2}')
 	sudo rm -rf $(HOME)/data/wordpress
 	sudo rm -rf $(HOME)/data/database
+	sudo rm -rf $(HOME)/data/prometheus
 
 re: fclean all
 

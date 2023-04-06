@@ -103,7 +103,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - $HOME/data/prometheus:/data/prometheus
+      - prometheus:/data/prometheus
     networks:
       - wordpress
     restart: always
@@ -129,3 +129,9 @@ volumes:
       type: none
       o: "bind"
       device: $HOME/data/database
+  prometheus:
+    driver: local
+    driver_opts:
+      type: none
+      o: "bind"
+      device: $HOME/data/prometheus
