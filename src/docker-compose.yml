@@ -79,6 +79,23 @@ services:
       - wordpress
     restart: always
 
+  ftpserver:
+    container_name: ftpserver
+    build:
+      context: ./requirements/ftpserver
+    environment:
+      - FT_USER
+      - FT_PASS
+    ports:
+      - "21:21"
+      - "20:20"
+      - '40000-40009:40000-40009'
+    networks:
+      - wordpress
+    restart: always
+    volumes:
+      - /data:/home/$FTP_USER
+
 networks:
   wordpress:
     name: wp-wordpress
