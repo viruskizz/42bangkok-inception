@@ -57,8 +57,8 @@ services:
     environment:
       - WP_DOMAIN
     ports:
-      - "8443:443"
-      - "8080:80"
+      - 8443:443
+      - 8080:80
     volumes:
       - wordpress:/var/www/html/wordpress
     networks:
@@ -72,7 +72,7 @@ services:
     build:
       context: ./requirements/redis
     ports:
-      - "6379:6379"
+      - 6379:6379
     volumes:
       - wordpress:/var/www/wordpress
     networks:
@@ -87,14 +87,26 @@ services:
       - FT_USER
       - FT_PASS
     ports:
-      - "21:21"
-      - "20:20"
-      - '40000-40009:40000-40009'
+      - 21:21
+      - 20:20
+      - 40000-40009:40000-40009
     networks:
       - wordpress
     restart: always
     volumes:
       - /data:/home/$FT_USER
+
+  prometheus:
+    container_name: prometheus
+    build:
+      context: ./requirements/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - $HOME/data/prometheus:/data/prometheus
+    networks:
+      - wordpress
+    restart: always
 
 networks:
   wordpress:
@@ -108,12 +120,12 @@ volumes:
   wordpress:
     driver: local
     driver_opts:
-      type: "none"
+      type: none
       o: "bind"
-      device: "$HOME/data/wordpress"
+      device: $HOME/data/wordpress
   database:
     driver: local
     driver_opts:
-      type: "none"
+      type: none
       o: "bind"
-      device: "$HOME/data/database"
+      device: $HOME/data/database
