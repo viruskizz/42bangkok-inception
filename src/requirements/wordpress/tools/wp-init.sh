@@ -1,7 +1,11 @@
 #!bin/bash
+YELLOW="\e[33m"
+RESET="\e[0m"
+
 alias wp="wp --allow-root --quiet"
 
 if [ ! -f wp-config.php ]; then
+
   wp config create \
     --dbhost="$DB_HOST" \
     --dbname="$DB_NAME" \
@@ -9,6 +13,7 @@ if [ ! -f wp-config.php ]; then
     --dbpass="$MYSQL_PASSWORD" \
     --force \
     --allow-root
+
   wp db create \
     --allow-root
   wp core install \
@@ -29,3 +34,5 @@ if [ ! -f wp-config.php ]; then
   wp option update siteurl "$WP_SCHEME://tsomsa.42.fr:$WP_PORT" --allow-root
   wp option update home "$WP_SCHEME://tsomsa.42.fr:$WP_PORT" --allow-root
 fi
+
+echo $YELLOW"Wordpress Started"$RESET
