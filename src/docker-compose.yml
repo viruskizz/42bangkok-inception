@@ -71,7 +71,7 @@ services:
   redis:
     container_name: redis
     build:
-      context: ./requirements/redis
+      context: ./requirements/bonus/redis
     ports:
       - 6379:6379
     volumes:
@@ -83,7 +83,7 @@ services:
   ftpserver:
     container_name: ftpserver
     build:
-      context: ./requirements/ftpserver
+      context: ./requirements/bonus/ftpserver
     environment:
       - FT_USER
       - FT_PASS
@@ -98,7 +98,7 @@ services:
   prometheus:
     container_name: prometheus
     build:
-      context: ./requirements/prometheus
+      context: ./requirements/bonus/prometheus
     ports:
       - 9090:9090
     volumes:
@@ -110,9 +110,6 @@ services:
 networks:
   wordpress:
     name: wp-wordpress
-    driver: bridge
-  mariadb:
-    name: db-mariadb
     driver: bridge
 
 volumes:
