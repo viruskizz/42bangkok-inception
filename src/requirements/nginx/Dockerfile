@@ -16,7 +16,6 @@ COPY conf/tsomsa.42.fr.conf /etc/nginx/conf.d
 COPY conf/default.conf      /etc/nginx/sites-available/default
 COPY conf/ssl-signed.conf   /etc/nginx/snippets/
 COPY conf/ssl-params.conf   /etc/nginx/snippets/
-COPY ./conf/index.html      /var/www/html
 COPY ./tools                /root/tools
 
 RUN chmod +x /root/tools/*.sh && /root/tools/generate-ssl.sh

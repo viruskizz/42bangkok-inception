@@ -40,8 +40,11 @@ COPY ./tools            /root/tools/
 
 RUN chmod +x /root/tools/*.sh
 
-RUN /root/tools/wp-setup.sh
-RUN /root/tools/adminer.sh
+RUN sh /root/tools/wp-setup.sh
+RUN sh /root/tools/adminer.sh
+
+RUN  mkdir -p /var/www/html/wordpress/42bangkok
+COPY ./conf/index.html  /var/www/html/wordpress/42bangkok
 
 STOPSIGNAL SIGQUIT
 
