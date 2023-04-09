@@ -19,6 +19,7 @@ services:
       - database:/var/lib/mysql
     networks:
       - wordpress
+    restart: always
 
   wordpress:
     container_name: wordpress
@@ -93,8 +94,6 @@ services:
     networks:
       - wordpress
     restart: always
-    volumes:
-      - /data:/home/$FT_USER
 
   prometheus:
     container_name: prometheus
@@ -135,3 +134,4 @@ volumes:
       type: none
       o: "bind"
       device: $HOME/data/prometheus
+

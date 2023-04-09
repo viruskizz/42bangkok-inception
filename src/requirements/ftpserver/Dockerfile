@@ -26,6 +26,6 @@ RUN chmod +x /root/tools/*.sh
 
 EXPOSE 20 21 40000-40009
 
-ENTRYPOINT  root/tools/docker-entrypoint.sh \
+ENTRYPOINT  sh root/tools/docker-entrypoint.sh \
             && /usr/sbin/vsftpd
 
