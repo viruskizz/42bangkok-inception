@@ -1,15 +1,14 @@
 #!bin/bash
-alias wp="wp --allow-root --quiet"
-REDIS_HOST=$(wp config get WP_REDIS_HOST)
+REDIS_HOST=$(wp config get WP_REDIS_HOST --allow-root)
 if [ -z $REDIS_HOST ]; then
 
-wp config set WP_REDIS_HOST "redis"
-wp config set WP_REDIS_PORT "6379"
-wp config set WP_REDIS_TIMEOUT "1"
-wp config set WP_REDIS_READ_TIMEOUT "1"
-wp config set WP_REDIS_DATABASE "0"
+wp config set WP_REDIS_HOST "redis" --allow-root
+wp config set WP_REDIS_PORT "6379" --allow-root
+wp config set WP_REDIS_TIMEOUT "1" --allow-root
+wp config set WP_REDIS_READ_TIMEOUT "1" --allow-root
+wp config set WP_REDIS_DATABASE "0" --allow-root
 # Install redis plugin
-wp plugin install redis-cache --activate
-wp redis enable
+wp plugin install redis-cache --activate --allow-root
+wp redis enable --allow-root
 
 fi

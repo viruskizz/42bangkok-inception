@@ -20,8 +20,4 @@ echo "$FT_USER" | tee -a /etc/vsftpd.chroot_list > /dev/null
 fi
 
 touch /var/log/vsftpd.log
-tail -f /var/log/vsftpd.log | tee /dev/stdout &
 touch /var/log/xferlog
-tail -f /var/log/xferlog | tee /dev/stdout &
-
-/usr/sbin/vsftpd

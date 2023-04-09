@@ -17,8 +17,3 @@ RUN /root/tools/setup.sh
 EXPOSE 9090
 
 ENTRYPOINT [ "prometheus", "--config.file=/etc/prometheus/prometheus.yml" ]
-
-# command
-# docker build -t prometheus .
-# docker run -d --name=prometheus  prometheus
-# docker run -p 9090:9090 --rm -it prometheus sh
