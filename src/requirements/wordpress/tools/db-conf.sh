@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 sed -i 's/MYSQL_USER/'"$MYSQL_USER"'/' /etc/my.cnf
 sed -i 's/MYSQL_PASSWORD/'"$MYSQL_PASSWORD"'/' /etc/my.cnf
