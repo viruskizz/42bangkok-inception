@@ -31,8 +31,8 @@ if [ ! -f wp-config.php ]; then
     --user_pass="$WP_USER_PASSWORD" \
     --allow-root \
     --quiet
-  wp option update siteurl "$WP_SCHEME://tsomsa.42.fr:$WP_PORT" --allow-root
-  wp option update home "$WP_SCHEME://tsomsa.42.fr:$WP_PORT" --allow-root
+  wp option update siteurl "https://tsomsa.42.fr" --allow-root
+  wp option update home "https://tsomsa.42.fr" --allow-root
 fi
 
 echo $YELLOW"Wordpress Started"$RESET
