@@ -24,8 +24,5 @@ EXPOSE 3306
 
 WORKDIR /root
 
-CMD ["mysqld"]
+ENTRYPOINT ["mysqld"]
 
-# command
-# docker build -t mariadb .
-# docker run --rm -it mariadb sh

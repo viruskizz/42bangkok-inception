@@ -2,10 +2,7 @@
 YELLOW="\e[33m"
 RESET="\e[0m"
 
-alias wp="wp --allow-root --quiet"
-
 if [ ! -f wp-config.php ]; then
-
   wp config create \
     --dbhost="$DB_HOST" \
     --dbname="$DB_NAME" \
@@ -16,6 +13,7 @@ if [ ! -f wp-config.php ]; then
 
   wp db create \
     --allow-root
+
   wp core install \
     --url="$DOMAIN_NAME" \
     --title="$WP_TITLE" \
@@ -29,8 +27,8 @@ if [ ! -f wp-config.php ]; then
     "$WP_USER_EMAIL" \
     --role=author \
     --user_pass="$WP_USER_PASSWORD" \
-    --allow-root \
-    --quiet
+    --allow-root
+
   wp option update siteurl "https://tsomsa.42.fr" --allow-root
   wp option update home "https://tsomsa.42.fr" --allow-root
 fi

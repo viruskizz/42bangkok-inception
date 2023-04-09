@@ -33,15 +33,14 @@ RUN apt-get update \
     php-xml \
     php-bcmath
 
-COPY conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-COPY conf/my.cnf /etc/my.cnf
+COPY conf/php-fpm.conf  /etc/php/7.3/fpm/php-fpm.conf
+COPY conf/www.conf      /etc/php/7.3/fpm/pool.d/www.conf
+COPY conf/my.cnf        /etc/my.cnf
+COPY ./tools            /root/tools/
 
-COPY ./tools /root/tools
 RUN chmod +x /root/tools/*.sh
 
 RUN /root/tools/wp-setup.sh
-
 RUN /root/tools/adminer.sh
 
 STOPSIGNAL SIGQUIT
@@ -50,9 +49,5 @@ EXPOSE 9000
 
 WORKDIR /var/www/html/wordpress
 
-ENTRYPOINT [ "sh", "/root/tools/docker-entrypoint.sh" ]
-
-# command
-# docker build -t wordpress -f Dockerfile .
-# docker run -d -p 9000:9000 --name=wordpress -v wordpress:/var/www/html/wordpress wordpress
-# docker exec -it web sh
+ENTRYPOINT  sh /root/tools/docker-entrypoint.sh && \
+            /usr/sbin/php-fpm7.3 -F -R

@@ -23,6 +23,3 @@ COPY ./conf/redis.conf /etc/redis
 
 ENTRYPOINT [ "redis-server", "--protected-mode", "no" ]
 
-# docker build -t redis .
-# docker run --rm -it redis sh
-# docker run -d redis redis -p 6379:6379

@@ -20,13 +20,12 @@ RUN apt-get update \
     vsftpd
 
 COPY ./conf/vsftpd.conf /etc/vsftpd.conf
-COPY ./tools /root/tools
+COPY ./tools            /root/tools
 
 RUN chmod +x /root/tools/*.sh
 
 EXPOSE 20 21 40000-40009
 
-ENTRYPOINT [ "/root/tools/docker-entrypoint.sh" ]
+ENTRYPOINT  root/tools/docker-entrypoint.sh \
+            && /usr/sbin/vsftpd
 
-# docker build -t ftrpserver .
-# docker run -p 21:21 --rm -it ftrpserver sh

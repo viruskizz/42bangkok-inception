@@ -11,7 +11,3 @@ DIR="/run/php"
 if [ ! -d "$DIR" ]; then
   mkdir -p "$DIR"
 fi
-
-alias wp="wp --allow-root"
-
-/usr/sbin/php-fpm7.3 -F -R

@@ -16,19 +16,15 @@ COPY conf/tsomsa.42.fr.conf /etc/nginx/conf.d
 COPY conf/default.conf      /etc/nginx/sites-available/default
 COPY conf/ssl-signed.conf   /etc/nginx/snippets/
 COPY conf/ssl-params.conf   /etc/nginx/snippets/
+COPY ./conf/index.html      /var/www/html
+COPY ./tools                /root/tools
 
-COPY ./tools /root/tools
 RUN chmod +x /root/tools/*.sh && /root/tools/generate-ssl.sh
-
-COPY ./conf/index.html /var/www/html
 
 EXPOSE 80
 EXPOSE 443
 
 STOPSIGNAL SIGQUIT
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
-# command
-# docker build -t nginx -f Dockerfile .
-# docker run -it --rm -d -p 8080:80 -p 443:443 --name web nginx
