@@ -2,29 +2,18 @@
 
 The `docker` container project. There are multiple containers in single project. Run all services in application with `docker-compose`.
 
-## Resources
- - https://github.com/mjstealey/wordpress-nginx-docker
+## Evaluation
+The acknowledge you should know to evaluation.
 
-## command
+### Docker
+- How Docker and docker compose work ?
 
-```sh
-make up
-```
+- The difference between a Docker image used with docker compose and without docker compose
 
+- The benefit of Docker compared to VMs
 
-## Database Part
+- The pertinence of the directory structure required for this project (an example is provided in the
+subject's PDF file).
 
-Check config
-```sh
-cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind-address
-```
-
-check network
-```sh
-telnet 127.0.0.1 3360
-```
-
-access db from remote
-```sh
-mysql -h 127.0.0.1 -P 3306 -u root -p
-```
+# Support Thai Language
+### Click this link 
