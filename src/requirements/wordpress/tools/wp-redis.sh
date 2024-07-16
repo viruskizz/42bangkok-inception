@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 REDIS_HOST=$(wp config get WP_REDIS_HOST --allow-root)
 if [ -z $REDIS_HOST ]; then
 

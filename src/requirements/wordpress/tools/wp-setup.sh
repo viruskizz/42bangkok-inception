@@ -1,6 +1,9 @@
-#!bin/bash
+#!/bin/bash
 # create html directory
+mkdir -p /var
 mkdir /var/www
+ls -l /var/www
+
 mkdir /var/www/html
 
 # Install wp-cli

@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 # https://linuxopsys.com/topics/install-vsftpd-ftp-server-on-debian
 # https://github.com/garethflowers/docker-ftp-server
 

@@ -3,6 +3,7 @@ FROM debian:buster-slim
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install --no-install-recommends --no-install-suggests -y \
+    bash \
     locales \
     curl \
     less \
@@ -40,8 +41,10 @@ COPY ./tools            /root/tools/
 
 RUN chmod +x /root/tools/*.sh
 
-RUN sh /root/tools/wp-setup.sh
-RUN sh /root/tools/adminer.sh
+RUN ls -l /root/tools
+
+RUN bash /root/tools/wp-setup.sh
+RUN bash /root/tools/adminer.sh
 
 RUN  mkdir -p /var/www/html/wordpress/42bangkok
 COPY ./conf/index.html  /var/www/html/wordpress/42bangkok

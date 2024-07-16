@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 # https://www.baeldung.com/openssl-self-signed-cert
 echo $DOMAIN_NAME
 

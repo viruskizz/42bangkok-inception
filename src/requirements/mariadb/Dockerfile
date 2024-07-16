@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install --no-install-recommends --no-install-sugge
     mariadb-server \
     mariadb-client
 
-COPY ./tools/ /root/tools
+COPY ./tools/ /root/tools/
 RUN chmod +x /root/tools/*.sh
-RUN /root/tools/dbsetup.sh
+# RUN /root/tools/dbsetup.sh
 
 EXPOSE 3306
 
